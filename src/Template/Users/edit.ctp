@@ -1,23 +1,24 @@
 <?php
-
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\User $users
+ * @var \App\Model\Entity\User $user
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->postLink(
+        <li><?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $user->id],
                 ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]
-            ) ?>
-        </li>
+            )
+        ?></li>
         <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Login Historys'), ['controller' => 'LoginHistorys', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Login History'), ['controller' => 'LoginHistorys', 'action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="users form large-9 medium8 columns content">
+<div class="users form large-9 medium-8 columns content">
     <?= $this->Form->create($user) ?>
     <fieldset>
         <legend><?= __('Edit User') ?></legend>

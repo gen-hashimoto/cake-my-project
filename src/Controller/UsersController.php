@@ -1,26 +1,26 @@
 <?php
-
 namespace App\Controller;
 
 use App\Controller\AppController;
 
 /**
  * Users Controller
- * 
+ *
  * @property \App\Model\Table\UsersTable $Users
- * 
- * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface ($object = null, array $settings = [])
+ *
+ * @method \App\Model\Entity\User[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class UsersController extends AppController
 {
     /**
      * Index method
-     * 
+     *
      * @return \Cake\Http\Response|null
      */
     public function index()
     {
         $users = $this->paginate($this->Users);
+
         $this->set(compact('users'));
     }
 
@@ -34,7 +34,7 @@ class UsersController extends AppController
     public function view($id = null)
     {
         $user = $this->Users->get($id, [
-            'contain' => [],
+            'contain' => ['LoginHistorys'],
         ]);
 
         $this->set('user', $user);
@@ -47,11 +47,11 @@ class UsersController extends AppController
      */
     public function add()
     {
-        $user = $this->User->newEntity();
+        $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved'));
+                $this->Flash->success(__('The user has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
@@ -73,9 +73,9 @@ class UsersController extends AppController
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->User->patchEntity($user, $this->request->getData());
+            $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved'));
+                $this->Flash->success(__('The user has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
@@ -100,6 +100,7 @@ class UsersController extends AppController
         } else {
             $this->Flash->error(__('The user could not be deleted. Please, try again.'));
         }
+
         return $this->redirect(['action' => 'index']);
     }
 }
