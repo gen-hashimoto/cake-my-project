@@ -47,6 +47,20 @@ class UsersTable extends Table
     }
 
     /**
+     * 直近１時間のユーザーデータ
+     */
+    public function findLastHour(Query $query, array $options){
+        return $query->where(['created >' => new \Cake\I18n\Date('-1 hours')]);
+    }
+
+    /**
+     * マルオを探せ
+     */
+    public function findMaruo(Query $query, array $options){
+        return $query->where(['name like' => '%マルオ%']);
+    }
+
+    /**
      * Default validation rules.
      *
      * @param \Cake\Validation\Validator $validator Validator instance.
