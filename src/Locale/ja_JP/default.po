@@ -1,0 +1,578 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2025-03-29 21:15+0900\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/LoginHistorysController.php:57
+#: Controller/LoginHistorysController.php:82
+msgid "The login history has been saved."
+msgstr ""
+
+#: Controller/LoginHistorysController.php:61
+#: Controller/LoginHistorysController.php:86
+msgid "The login history could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/LoginHistorysController.php:104
+msgid "The login history has been deleted."
+msgstr ""
+
+#: Controller/LoginHistorysController.php:106
+msgid "The login history could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/UsersController.php:54
+#: Controller/UsersController.php:78
+msgid "The user has been saved."
+msgstr ""
+
+#: Controller/UsersController.php:58
+#: Controller/UsersController.php:82
+msgid "The user could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/UsersController.php:99
+msgid "The user has been deleted."
+msgstr ""
+
+#: Controller/UsersController.php:101
+msgid "The user could not be deleted. Please, try again."
+msgstr ""
+
+#: Template/Layout/error.ctp:35
+#: Template/Error/error400.ctp:36
+#: Template/Error/error500.ctp:41
+msgid "Error"
+msgstr ""
+
+#: Template/Layout/error.ctp:43
+msgid "Back"
+msgstr ""
+
+#: Template/LoginHistorys/add.ctp:9
+#: Template/LoginHistorys/edit.ctp:9
+#: Template/LoginHistorys/index.ctp:9
+#: Template/LoginHistorys/index.ctp:28
+#: Template/LoginHistorys/view.ctp:9
+#: Template/Users/add.ctp:9
+#: Template/Users/edit.ctp:9
+#: Template/Users/index.ctp:9
+#: Template/Users/index.ctp:29
+#: Template/Users/view.ctp:9
+#: Template/Users/view.ctp:71
+msgid "Actions"
+msgstr ""
+
+#: Template/LoginHistorys/add.ctp:10
+#: Template/LoginHistorys/edit.ctp:16
+#: Template/LoginHistorys/view.ctp:12
+#: Template/Users/add.ctp:11
+#: Template/Users/edit.ctp:17
+#: Template/Users/index.ctp:11
+#: Template/Users/view.ctp:14
+msgid "List Login Historys"
+msgstr "ログイン履歴一覧"
+
+#: Template/LoginHistorys/add.ctp:11
+#: Template/LoginHistorys/edit.ctp:17
+#: Template/LoginHistorys/index.ctp:11
+#: Template/LoginHistorys/view.ctp:14
+#: Template/Users/add.ctp:10
+#: Template/Users/edit.ctp:16
+#: Template/Users/view.ctp:12
+msgid "List Users"
+msgstr ""
+
+#: Template/LoginHistorys/add.ctp:12
+#: Template/LoginHistorys/edit.ctp:18
+#: Template/LoginHistorys/index.ctp:12
+#: Template/LoginHistorys/view.ctp:15
+#: Template/Users/index.ctp:10
+#: Template/Users/view.ctp:13
+msgid "New User"
+msgstr "ユーザー新規登録"
+
+#: Template/LoginHistorys/add.ctp:18
+msgid "Add Login History"
+msgstr ""
+
+#: Template/LoginHistorys/add.ctp:27
+#: Template/LoginHistorys/edit.ctp:33
+#: Template/Users/add.ctp:28
+#: Template/Users/edit.ctp:34
+#: View/Helper/FormHelper.php:2030
+msgid "Submit"
+msgstr ""
+
+#: Template/LoginHistorys/edit.ctp:11
+#: Template/LoginHistorys/index.ctp:45
+#: Template/Users/edit.ctp:11
+#: Template/Users/index.ctp:47
+#: Template/Users/view.ctp:86
+msgid "Delete"
+msgstr ""
+
+#: Template/LoginHistorys/edit.ctp:13
+#: Template/LoginHistorys/index.ctp:45
+#: Template/LoginHistorys/view.ctp:11
+#: Template/Users/edit.ctp:13
+#: Template/Users/index.ctp:47
+#: Template/Users/view.ctp:11
+#: Template/Users/view.ctp:86
+msgid "Are you sure you want to delete # {0}?"
+msgstr ""
+
+#: Template/LoginHistorys/edit.ctp:24
+#: Template/LoginHistorys/view.ctp:10
+msgid "Edit Login History"
+msgstr ""
+
+#: Template/LoginHistorys/index.ctp:10
+#: Template/LoginHistorys/view.ctp:13
+#: Template/Users/add.ctp:12
+#: Template/Users/edit.ctp:18
+#: Template/Users/index.ctp:12
+#: Template/Users/view.ctp:15
+msgid "New Login History"
+msgstr "ログイン履歴新規登録"
+
+#: Template/LoginHistorys/index.ctp:16
+msgid "Login Historys"
+msgstr ""
+
+#: Template/LoginHistorys/index.ctp:43
+#: Template/Users/index.ctp:45
+#: Template/Users/view.ctp:84
+#: View/Helper/PaginatorHelper.php:1271
+msgid "View"
+msgstr ""
+
+#: Template/LoginHistorys/index.ctp:44
+#: Template/Users/index.ctp:46
+#: Template/Users/view.ctp:85
+msgid "Edit"
+msgstr ""
+
+#: Template/LoginHistorys/index.ctp:53
+#: Template/Users/index.ctp:55
+msgid "first"
+msgstr ""
+
+#: Template/LoginHistorys/index.ctp:54
+#: Template/Users/index.ctp:56
+msgid "previous"
+msgstr ""
+
+#: Template/LoginHistorys/index.ctp:56
+#: Template/Users/index.ctp:58
+msgid "next"
+msgstr ""
+
+#: Template/LoginHistorys/index.ctp:57
+#: Template/Users/index.ctp:59
+msgid "last"
+msgstr ""
+
+#: Template/LoginHistorys/index.ctp:59
+#: Template/Users/index.ctp:61
+msgid "Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total"
+msgstr ""
+
+#: Template/LoginHistorys/view.ctp:11
+msgid "Delete Login History"
+msgstr ""
+
+#: Template/LoginHistorys/view.ctp:22
+msgid "User"
+msgstr ""
+
+#: Template/LoginHistorys/view.ctp:26
+#: Template/Users/view.ctp:38
+#: Template/Users/view.ctp:69
+msgid "Created User"
+msgstr ""
+
+#: Template/LoginHistorys/view.ctp:30
+#: Template/Users/view.ctp:42
+#: Template/Users/view.ctp:70
+msgid "Modified User"
+msgstr ""
+
+#: Template/LoginHistorys/view.ctp:34
+#: Template/Users/view.ctp:46
+#: Template/Users/view.ctp:63
+msgid "Id"
+msgstr ""
+
+#: Template/LoginHistorys/view.ctp:38
+#: Template/Users/view.ctp:65
+msgid "Login Time"
+msgstr ""
+
+#: Template/LoginHistorys/view.ctp:42
+#: Template/Users/view.ctp:66
+msgid "Logout Time"
+msgstr ""
+
+#: Template/LoginHistorys/view.ctp:46
+#: Template/Users/view.ctp:50
+#: Template/Users/view.ctp:67
+msgid "Created"
+msgstr ""
+
+#: Template/LoginHistorys/view.ctp:50
+#: Template/Users/view.ctp:54
+#: Template/Users/view.ctp:68
+msgid "Modified"
+msgstr ""
+
+#: Template/Users/add.ctp:18
+msgid "Add User"
+msgstr ""
+
+#: Template/Users/edit.ctp:24
+#: Template/Users/view.ctp:10
+msgid "Edit User"
+msgstr ""
+
+#: Template/Users/index.ctp:16
+msgid "Users"
+msgstr ""
+
+#: Template/Users/view.ctp:11
+msgid "Delete User"
+msgstr ""
+
+#: Template/Users/view.ctp:22
+msgid "Account"
+msgstr ""
+
+#: Template/Users/view.ctp:26
+msgid "Password"
+msgstr ""
+
+#: Template/Users/view.ctp:30
+msgid "Name"
+msgstr ""
+
+#: Template/Users/view.ctp:34
+msgid "Email"
+msgstr ""
+
+#: Template/Users/view.ctp:59
+msgid "Related Login Historys"
+msgstr ""
+
+#: Template/Users/view.ctp:64
+msgid "User Id"
+msgstr ""
+
+#: Template/Error/error400.ctp:37
+msgid "The requested address {0} was not found on this server."
+msgstr ""
+
+#: Template/Error/error500.ctp:39
+msgid "An Internal Error Has Occurred"
+msgstr ""
+
+#: Controller/Component/AuthComponent.php:502
+msgid "You are not authorized to access that location."
+msgstr ""
+
+#: Controller/Component/CsrfComponent.php:181
+#: Http/Middleware/CsrfProtectionMiddleware.php:228
+msgid "Missing CSRF token cookie"
+msgstr ""
+
+#: Controller/Component/CsrfComponent.php:185
+#: Http/Middleware/CsrfProtectionMiddleware.php:232
+msgid "CSRF token mismatch."
+msgstr ""
+
+#: Error/ExceptionRenderer.php:301
+msgid "Not Found"
+msgstr ""
+
+#: Error/ExceptionRenderer.php:303
+msgid "An Internal Error Has Occurred."
+msgstr ""
+
+#: Http/Response.php:2679
+msgid "The requested file contains `..` and will not be read."
+msgstr ""
+
+#: Http/Response.php:2700
+msgid "The requested file was not found"
+msgstr ""
+
+#: I18n/Number.php:89
+msgid "{0,number,#,###.##} KB"
+msgstr ""
+
+#: I18n/Number.php:91
+msgid "{0,number,#,###.##} MB"
+msgstr ""
+
+#: I18n/Number.php:93
+msgid "{0,number,#,###.##} GB"
+msgstr ""
+
+#: I18n/Number.php:95
+msgid "{0,number,#,###.##} TB"
+msgstr ""
+
+#: I18n/Number.php:87
+msgid "{0,number,integer} Byte"
+msgid_plural "{0,number,integer} Bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: I18n/RelativeTimeFormatter.php:80
+msgid "{0} from now"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:80
+msgid "{0} ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:83
+msgid "{0} after"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:83
+msgid "{0} before"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:114
+msgid "just now"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:151
+msgid "about a second ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:152
+msgid "about a minute ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:153
+msgid "about an hour ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:154
+#: I18n/RelativeTimeFormatter.php:332
+msgid "about a day ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:155
+#: I18n/RelativeTimeFormatter.php:333
+msgid "about a week ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:156
+#: I18n/RelativeTimeFormatter.php:334
+msgid "about a month ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:157
+#: I18n/RelativeTimeFormatter.php:335
+msgid "about a year ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:168
+msgid "in about a second"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:169
+msgid "in about a minute"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:170
+msgid "in about an hour"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:171
+#: I18n/RelativeTimeFormatter.php:346
+msgid "in about a day"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:172
+#: I18n/RelativeTimeFormatter.php:347
+msgid "in about a week"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:173
+#: I18n/RelativeTimeFormatter.php:348
+msgid "in about a month"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:174
+#: I18n/RelativeTimeFormatter.php:349
+msgid "in about a year"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:304
+msgid "today"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:370
+msgid "%s ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:371
+msgid "on %s"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:47
+#: I18n/RelativeTimeFormatter.php:126
+#: I18n/RelativeTimeFormatter.php:316
+msgid "{0} year"
+msgid_plural "{0} years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: I18n/RelativeTimeFormatter.php:51
+#: I18n/RelativeTimeFormatter.php:129
+#: I18n/RelativeTimeFormatter.php:319
+msgid "{0} month"
+msgid_plural "{0} months"
+msgstr[0] ""
+msgstr[1] ""
+
+#: I18n/RelativeTimeFormatter.php:57
+#: I18n/RelativeTimeFormatter.php:132
+#: I18n/RelativeTimeFormatter.php:322
+msgid "{0} week"
+msgid_plural "{0} weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: I18n/RelativeTimeFormatter.php:59
+#: I18n/RelativeTimeFormatter.php:135
+#: I18n/RelativeTimeFormatter.php:325
+msgid "{0} day"
+msgid_plural "{0} days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: I18n/RelativeTimeFormatter.php:64
+#: I18n/RelativeTimeFormatter.php:138
+msgid "{0} hour"
+msgid_plural "{0} hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: I18n/RelativeTimeFormatter.php:68
+#: I18n/RelativeTimeFormatter.php:141
+msgid "{0} minute"
+msgid_plural "{0} minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: I18n/RelativeTimeFormatter.php:72
+#: I18n/RelativeTimeFormatter.php:144
+msgid "{0} second"
+msgid_plural "{0} seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ORM/RulesChecker.php:56
+msgid "This value is already in use"
+msgstr ""
+
+#: ORM/RulesChecker.php:103
+msgid "This value does not exist"
+msgstr ""
+
+#: ORM/RulesChecker.php:127
+msgid "The count does not match {0}{1}"
+msgstr ""
+
+#: Utility/Text.php:934
+msgid "and"
+msgstr ""
+
+#: Validation/Validator.php:2437
+#: View/Form/ArrayContext.php:226
+msgid "This field is required"
+msgstr ""
+
+#: Validation/Validator.php:2459
+msgid "This field cannot be left empty"
+msgstr ""
+
+#: Validation/Validator.php:2610
+msgid "The provided value is invalid"
+msgstr ""
+
+#: View/Helper/FormHelper.php:1108
+msgid "Edit {0}"
+msgstr ""
+
+#: View/Helper/FormHelper.php:1110
+msgid "New {0}"
+msgstr ""
+
+#: View/Helper/HtmlHelper.php:818
+msgid "Home"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:539
+msgid "January"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:540
+msgid "February"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:541
+msgid "March"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:542
+msgid "April"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:543
+msgid "May"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:544
+msgid "June"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:545
+msgid "July"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:546
+msgid "August"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:547
+msgid "September"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:548
+msgid "October"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:549
+msgid "November"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:550
+msgid "December"
+msgstr ""
+
