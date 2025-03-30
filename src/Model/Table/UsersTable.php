@@ -6,6 +6,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+// use Cake\Localized\Validation\JpValidation;
 
 /**
  * Users Model
@@ -70,8 +71,8 @@ class UsersTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
-        $validator->setProvider('custom', 'App\Model\Validation\CustomValidation');
-
+        // $validator->setProvider('custom', 'App\Model\Validation\CustomValidation');
+        // $validator->setProvider('jp', JpValidation::class);
 
         $validator
             ->integer('id')
@@ -102,9 +103,14 @@ class UsersTable extends Table
         $validator
             ->scalar('tel')
             ->allowEmpty('tel')
+            // ->add('tel', 'tel', [
+            //     'rule' => 'checkTel',
+            //     'provider' => 'custom',
+            //     'message' => '電話番号が正しくありません'
+            // ]);
             ->add('tel', 'tel', [
-                'rule' => 'checkTel',
-                'provider' => 'custom',
+                'rule' => 'phone',
+                'provider' => 'jp',
                 'message' => '電話番号が正しくありません'
             ]);
         // ->add('tel', 'tel', [

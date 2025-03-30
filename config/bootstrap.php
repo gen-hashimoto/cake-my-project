@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
@@ -43,6 +44,8 @@ use Cake\Mailer\Email;
 use Cake\Mailer\TransportFactory;
 use Cake\Utility\Inflector;
 use Cake\Utility\Security;
+use Cake\Validation\Validator;
+use Cake\Localized\Validation\JpValidation;
 
 /**
  * Uncomment block of code below if you want to use `.env` file during development.
@@ -201,3 +204,6 @@ Type::build('timestamp')
 //Inflector::rules('irregular', ['red' => 'redlings']);
 //Inflector::rules('uninflected', ['dontinflectme']);
 //Inflector::rules('transliteration', ['/å/' => 'aa']);
+
+// Validator::addDefaultProvider('custom', 'App\Model\Validation\CustomValidation');
+Validator::addDefaultProvider('jp', JpValidation::class);
