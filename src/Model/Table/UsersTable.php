@@ -49,14 +49,16 @@ class UsersTable extends Table
     /**
      * 直近１時間のユーザーデータ
      */
-    public function findLastHour(Query $query, array $options){
+    public function findLastHour(Query $query, array $options)
+    {
         return $query->where(['created >' => new \Cake\I18n\Date('-1 hours')]);
     }
 
     /**
      * マルオを探せ
      */
-    public function findMaruo(Query $query, array $options){
+    public function findMaruo(Query $query, array $options)
+    {
         return $query->where(['name like' => '%マルオ%']);
     }
 
@@ -68,6 +70,9 @@ class UsersTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
+        $validator->setProvider('custom', 'App\Model\Validation\CustomValidation');
+
+
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
@@ -93,6 +98,23 @@ class UsersTable extends Table
         $validator
             ->email('email')
             ->notEmptyString('email');
+
+        $validator
+            ->scalar('tel')
+            ->allowEmpty('tel')
+            ->add('tel', 'tel', [
+                'rule' => 'checkTel',
+                'provider' => 'custom',
+                'message' => '電話番号が正しくありません'
+            ]);
+        // ->add('tel', 'tel', [
+        //     // 'rule' => [$this, 'checkTel'],
+        //     'rule' => function ($value, $context) {
+        //         // \Cake\Log\Log::debug($context);
+        //         return (bool) preg_match('/^[0-9][0-9\-]+[0-9]$/', $value);
+        //     },
+        //     'message' => '電話番号が正しくありません'
+        // ]);
 
         $validator
             ->scalar('created_user')
@@ -121,4 +143,10 @@ class UsersTable extends Table
 
         return $rules;
     }
+
+    // public function checkTel($value, $context)
+    // {
+    //     // \Cake\Log\Log::debug($context);
+    //     return (bool) preg_match('/^[0-9][0-9\-]+[0-9]$/', $value);
+    // }
 }

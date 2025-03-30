@@ -35,6 +35,10 @@
             <td><?= h($user->email) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Tel') ?></th>
+            <td><?= h($user->tel) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Created User') ?></th>
             <td><?= h($user->created_user) ?></td>
         </tr>

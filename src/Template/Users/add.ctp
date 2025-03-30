@@ -21,6 +21,7 @@
             echo $this->Form->control('password');
             echo $this->Form->control('name');
             echo $this->Form->control('email');
+            echo $this->Form->control('tel');
             echo $this->Form->control('created_user');
             echo $this->Form->control('modified_user');
         ?>
