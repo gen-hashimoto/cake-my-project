@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\LoginHistory[]|\Cake\Collection\CollectionInterface $loginHistorys
@@ -13,7 +14,10 @@
     </ul>
 </nav>
 <div class="loginHistorys index large-9 medium-8 columns content">
-    <h3><?= __('Login Historys') ?></h3>
+    <h3 class="large-10 medium-10 columns"><?= __('Login Historys') ?></h3>
+    <span class="large-2 medium-2 columns" style="border:thick double #258D97; text-align: center;">
+        <?= $this->Html->link(__('Download'), ['action' => 'download']) ?>
+    </span>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -30,21 +34,21 @@
         </thead>
         <tbody>
             <?php foreach ($loginHistorys as $loginHistory): ?>
-            <tr>
-                <td><?= $this->Number->format($loginHistory->id) ?></td>
-                <td><?= $loginHistory->has('user') ? $this->Html->link($loginHistory->user->name, ['controller' => 'Users', 'action' => 'view', $loginHistory->user->id]) : '' ?></td>
-                <td><?= h($loginHistory->login_time) ?></td>
-                <td><?= h($loginHistory->logout_time) ?></td>
-                <td><?= h($loginHistory->created) ?></td>
-                <td><?= h($loginHistory->modified) ?></td>
-                <td><?= h($loginHistory->created_user) ?></td>
-                <td><?= h($loginHistory->modified_user) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $loginHistory->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $loginHistory->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $loginHistory->id], ['confirm' => __('Are you sure you want to delete # {0}?', $loginHistory->id)]) ?>
-                </td>
-            </tr>
+                <tr>
+                    <td><?= $this->Number->format($loginHistory->id) ?></td>
+                    <td><?= $loginHistory->has('user') ? $this->Html->link($loginHistory->user->name, ['controller' => 'Users', 'action' => 'view', $loginHistory->user->id]) : '' ?></td>
+                    <td><?= h($loginHistory->login_time) ?></td>
+                    <td><?= h($loginHistory->logout_time) ?></td>
+                    <td><?= h($loginHistory->created) ?></td>
+                    <td><?= h($loginHistory->modified) ?></td>
+                    <td><?= h($loginHistory->created_user) ?></td>
+                    <td><?= h($loginHistory->modified_user) ?></td>
+                    <td class="actions">
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $loginHistory->id]) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $loginHistory->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $loginHistory->id], ['confirm' => __('Are you sure you want to delete # {0}?', $loginHistory->id)]) ?>
+                    </td>
+                </tr>
             <?php endforeach; ?>
         </tbody>
     </table>

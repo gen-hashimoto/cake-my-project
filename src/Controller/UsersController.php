@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Zend\Diactoros\UploadedFile;
+use \SplFileObject;
 
 /**
  * Users Controller
@@ -128,5 +130,112 @@ class UsersController extends AppController
     public function logout()
     {
         return $this->redirect($this->Auth->logout());
+    }
+
+    public function upload()
+    {
+        if ($this->request->is('post')) {
+            // ファイルの拡張子がcsvファイル以外の場合はファイル形式エラーとする。
+            if (mb_strtolower(pathinfo($_FILES['upload_file']['name'], PATHINFO_EXTENSION)) != 'csv') {
+                $this->Flash->error(__('The file format is invalid.'));
+                return;
+            }
+
+            // ファイル読込み準備
+            $uploadFile = $_FILES['upload_file']['tmp_name'];
+            file_put_contents($uploadFile, mb_convert_encoding(file_get_contents($uploadFile), 'UTF-8', 'SJIS'));
+            $file = new SplFileObject($uploadFile);
+            $file->setFlags(SplFileObject::READ_CSV);
+
+            $new_users = array();
+            $errors = array();
+
+            foreach ($file as $rowIndex => $line) {
+                if ($rowIndex < 1) {
+                    // 1行目はヘッダーなので読み飛ばし
+                    continue;
+                }
+
+                // 項目数が合わない場合は項目数エラーを記録し次の行を処理します
+                // 最終行がからの場合はスルーします
+                if (count($line) != 5) {
+                    if ($file->valid() || ($file->eof() && !empty($line[0]))) {
+                        $errors = $this->setError($errors, $rowIndex, __('The number of items is invalid.'));
+                    }
+                } else {
+                    // 取り込んだCSVデータ行からユーザーデータ配列を作成します。
+                    $arrUser = $this->createUserArray($line);
+                    // ユーザーデータの配列をユーザーエンティティにパッチします。
+                    $user = $this->Users->newEntity($arrUser);
+
+                    // Validationでエラーがあった場合、エンティティにエラーがセットされるので
+                    // 最後にエラー一覧を表示するため、エラーがある場合は別で保存しておきます。
+                    $entityErrors = $user->getErrors();
+                    foreach ($entityErrors as $key => $value) {
+                        if (is_array($value)) {
+                            foreach ($value as $rule => $message) {
+                                $errors = $this->setError($errors, $rowIndex, $message);
+                            }
+                        }
+                    }
+                    // Validationエラーがなかった場合は、一括保存のため配列に入れておきます。
+                    if (empty($errors)) {
+                        array_push($new_users, $user);
+                    }
+                }
+            }
+
+            // エラーがなかった場合データを保存し一覧画面に遷移します。
+            // エラーがあった場合はファイル選択画面に遷移しエラー内容を表示します。
+            if (!$errors) {
+                // ユーザーデータを登録する
+                if ($this->Users->saveMany($new_users)) {
+                    $this->Flash->success(__('The user has been saved.'));
+                    return $this->redirect(['action' => 'index']);
+                }
+                // データセーブのタイミングでユーザーテーブルのbuildRulesメソッドでのチェックが行われます。
+                // buildRulesメソッドでエラー場あった場合、もしくはデータベースの保存時にエラーが発生した場合は
+                // このメッセージが表示されます。
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            } else {
+                // ファイルアップロード画面にエラー内容を渡します。
+                $this->Flash->error(__('Contains incorrect data. Please check the message, correct the data and upload again.'));
+                $this->set(compact('errors'));
+            }
+        }
+    }
+
+    /**
+     * ユーザーデータ取り込みcsvデータの1行から、1件のユーザーデータ配列を作成します。
+     * @param [array] $line csvの行データ配列
+     * @return ユーザーデータ配列
+     */
+    private function createUserArray($line)
+    {
+        $arr = array();
+        $arr['account'] = $line[0];
+        $arr['password'] = $line[1];
+        $arr['name'] = $line[2];
+        $arr['email'] = $line[3];
+        $arr['tel'] = $line[4];
+
+        return $arr;
+    }
+
+    /**
+     * エラー情報をエラー蓄積用配列にセットし返します。
+     * @param [array] $errors エラー蓄積用配列
+     * @param [int] $rowIndex エラー発生行番号(行番号を表示したくない場合は空文字可)
+     * @param [array] $description エラーメッセージ
+     * @return エラー蓄積用配列
+     */
+    private function setError($errors, $rowIndex, $description)
+    {
+        $error = array();
+        empty($rowIndex) ? $error['LINE_NO'] = '' : $error['LINE_NO'] = $rowIndex + 1;
+        $error['DESCRIPTION'] = $description;
+        array_push($errors, $error);
+
+        return $errors;
     }
 }
