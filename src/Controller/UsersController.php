@@ -80,20 +80,114 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
+        // $this->editOrigin($id);
+        $this->editInTransaction($id);
+        // $this->editInClosure($id);
+    }
+
+    /**
+     * トランザクションを処理しないデータ編集
+     */
+    public function editOrigin($id = null)
+    {
         $user = $this->Users->get($id, [
             'contain' => [],
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
 
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $result = true;
+            // ユーザー変更履歴を生成する
+            $this->loadModel('UserChangeLogs');
+            $userChangeLog = $this->UserChangeLogs->newEntity();
+            $userChangeLog->action = 'edit';
+            $userChangeLog->before_value = serialize($user);
+            $userChangeLog->modified_user = $this->Auth->user('account');
+            $userChangeLog->created_user = $this->Auth->user('account');
+
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            $userChangeLog->after_value = serialize($user);
+
+            // ユーザーデータの保存
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('ユーザーを保存しました。'));
+            } else {
+                $this->Flash->error(__('ユーザーが保存できませんでした。'));
+                $result = false;
+            }
+
+            //ユーザー変更ログの保存
+            if ($this->UserChangeLogs->save($userChangeLog)) {
+                $this->Flash->success(__('ユーザー変更ログを保存しました。'));
+            } else {
+                $this->Flash->error(__('ユーザー変更ログが保存できませんでした。'));
+                $result = false;
+            }
+
+            // エラーがなければ一覧画面に遷移する
+            if ($result) {
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $this->set(compact('user'));
     }
+
+    /**
+     * トランザクションを処理するデータ編集 その１
+     */
+    public function editInTransaction($id = null)
+    {
+        $user = $this->Users->get($id, [
+            'contain' => [],
+        ]);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $result = true;
+            // ユーザー変更履歴を生成する
+            $this->loadModel('UserChangeLogs');
+            $userChangeLog = $this->UserChangeLogs->newEntity();
+            $userChangeLog->action = 'edit';
+            $userChangeLog->before_value = serialize($user);
+            $userChangeLog->modified_user = $this->Auth->user('account');
+            $userChangeLog->created_user = $this->Auth->user('account');
+
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            $userChangeLog->after_value = serialize($user);
+
+            // トランザクション開始
+            $conn = $this->Users->getConnection();
+            $conn->begin();
+
+            // ユーザーデータの保存
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('ユーザーを保存しました。'));
+            } else {
+                $this->Flash->error(__('ユーザーが保存できませんでした。'));
+                $result = false;
+            }
+
+            //ユーザー変更ログの保存
+            if ($this->UserChangeLogs->save($userChangeLog)) {
+                $this->Flash->success(__('ユーザー変更ログを保存しました。'));
+            } else {
+                $this->Flash->error(__('ユーザー変更ログが保存できませんでした。'));
+                $result = false;
+            }
+
+            // エラーがなければ一覧画面に遷移する
+            if ($result) {
+                // トランザクション、コミット
+                $conn->commit();
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('ユーザーとユーザーの変更ログの両方の保存が成功しなかったためロールバックしました。'));
+                // トランザクション、ロールバック
+                $conn->rollback();
+            }
+        }
+        $this->set(compact('user'));
+    }
+
+
 
     /**
      * Delete method
