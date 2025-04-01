@@ -81,8 +81,8 @@ class UsersController extends AppController
     public function edit($id = null)
     {
         // $this->editOrigin($id);
-        $this->editInTransaction($id);
-        // $this->editInClosure($id);
+        // $this->editInTransaction($id);
+        $this->editInClosure($id);
     }
 
     /**
@@ -197,46 +197,44 @@ class UsersController extends AppController
         ]);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            // saveを行う処理をクロージャーに入れる
-            $saveProc = function ()use($user){
+            //saveを行う処理をクロージャにいれる
+            $saveProc = function () use ($user) {
+                $saveResult = true;
+                // ユーザー変更履歴を生成する
+                $this->loadModel('UserChangeLogs');
+                $userChangeLog = $this->UserChangeLogs->newEntity();
+                $userChangeLog->action = 'edit';
+                $userChangeLog->before_value = serialize($user);
+                $userChangeLog->modified_user = $this->Auth->user('account');
+                $userChangeLog->created_user = $this->Auth->user('account');
 
-            $saveResult = true;
-            // ユーザー変更履歴を生成する
-            $this->loadModel('UserChangeLogs');
-            $userChangeLog = $this->UserChangeLogs->newEntity();
-            $userChangeLog->action = 'edit';
-            $userChangeLog->before_value = serialize($user);
-            $userChangeLog->modified_user = $this->Auth->user('account');
-            $userChangeLog->created_user = $this->Auth->user('account');
+                $user = $this->Users->patchEntity($user, $this->request->getData());
+                $userChangeLog->after_value = serialize($user);
 
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            $userChangeLog->after_value = serialize($user);
+                // ユーザーデータの保存
+                if ($this->Users->save($user)) {
+                    $this->Flash->success(__('ユーザーを保存しました。'));
+                } else {
+                    $this->Flash->error(__('ユーザーが保存できませんでした。'));
+                    $saveResult = false;
+                }
 
-            // ユーザーデータの保存
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('ユーザーを保存しました。'));
-            } else {
-                $this->Flash->error(__('ユーザーが保存できませんでした。'));
-                $saveResult = false;
-            }
+                //ユーザー変更ログの保存
+                if ($this->UserChangeLogs->save($userChangeLog)) {
+                    $this->Flash->success(__('ユーザー変更ログを保存しました。'));
+                } else {
+                    $this->Flash->error(__('ユーザー変更ログが保存できませんでした。'));
+                    $saveResult = false;
+                }
+                return $saveResult;
+            };
 
-            //ユーザー変更ログの保存
-            if ($this->UserChangeLogs->save($userChangeLog)) {
-                $this->Flash->success(__('ユーザー変更ログを保存しました。'));
-            } else {
-                $this->Flash->error(__('ユーザー変更ログが保存できませんでした。'));
-                $saveResult = false;
-            }
-            }
-
-            // DBのコネクションを取得し、データ保存処理を実行
+            //DBのコネクションを取得し、データ保存処理を実行
             $conn = $this->Users->getConnection();
-            $result=$conn->transactional($saveProc);
+            $result = $conn->transactional($saveProc);
 
             // エラーがなければ一覧画面に遷移する
             if ($result) {
-                // トランザクション、コミット
-                $conn->commit();
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('ユーザーとユーザーの変更ログの両方の保存が成功しなかったためロールバックしました。'));
@@ -246,7 +244,6 @@ class UsersController extends AppController
         }
         $this->set(compact('user'));
     }
-
 
     /**
      * Delete method
