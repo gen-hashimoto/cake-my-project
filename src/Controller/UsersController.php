@@ -34,6 +34,11 @@ class UsersController extends AppController
         $users = $this->paginate($query);
 
         $this->set(compact('users'));
+
+        // $this->log('これはログファイルに出力されるメッセージです。', 'debug');
+        // \Cake\Log\Log::debug('ログテスト!');
+        // \Cake\Log\Log::info('ログテスト!INFO');
+        // $this->log('これはログファイルに出力されるメッセージです。', 'debug');
     }
 
     /**
