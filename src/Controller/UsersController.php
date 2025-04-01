@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Exception;
 use Zend\Diactoros\UploadedFile;
 use \SplFileObject;
 
@@ -190,6 +191,61 @@ class UsersController extends AppController
     /**
      * クロージャーを使ったトランザクション処理
      */
+    // public function editInClosure($id = null)
+    // {
+    //     $user = $this->Users->get($id, [
+    //         'contain' => [],
+    //     ]);
+
+    //     if ($this->request->is(['patch', 'post', 'put'])) {
+    //         //saveを行う処理をクロージャにいれる
+    //         $saveProc = function () use ($user) {
+    //             $saveResult = true;
+    //             // ユーザー変更履歴を生成する
+    //             $this->loadModel('UserChangeLogs');
+    //             $userChangeLog = $this->UserChangeLogs->newEntity();
+    //             $userChangeLog->action = 'edit';
+    //             $userChangeLog->before_value = serialize($user);
+    //             $userChangeLog->modified_user = $this->Auth->user('account');
+    //             $userChangeLog->created_user = $this->Auth->user('account');
+
+    //             $user = $this->Users->patchEntity($user, $this->request->getData());
+    //             $userChangeLog->after_value = serialize($user);
+
+    //             // ユーザーデータの保存
+    //             if ($this->Users->save($user)) {
+    //                 $this->Flash->success(__('ユーザーを保存しました。'));
+    //             } else {
+    //                 $this->Flash->error(__('ユーザーが保存できませんでした。'));
+    //                 $saveResult = false;
+    //             }
+
+    //             //ユーザー変更ログの保存
+    //             if ($this->UserChangeLogs->save($userChangeLog)) {
+    //                 $this->Flash->success(__('ユーザー変更ログを保存しました。'));
+    //             } else {
+    //                 $this->Flash->error(__('ユーザー変更ログが保存できませんでした。'));
+    //                 $saveResult = false;
+    //             }
+    //             return $saveResult;
+    //         };
+
+    //         //DBのコネクションを取得し、データ保存処理を実行
+    //         $conn = $this->Users->getConnection();
+    //         $result = $conn->transactional($saveProc);
+
+    //         // エラーがなければ一覧画面に遷移する
+    //         if ($result) {
+    //             return $this->redirect(['action' => 'index']);
+    //         } else {
+    //             $this->Flash->error(__('ユーザーとユーザーの変更ログの両方の保存が成功しなかったためロールバックしました。'));
+    //             // トランザクション、ロールバック
+    //             $conn->rollback();
+    //         }
+    //     }
+    //     $this->set(compact('user'));
+    // }
+
     public function editInClosure($id = null)
     {
         $user = $this->Users->get($id, [
@@ -215,31 +271,33 @@ class UsersController extends AppController
                 if ($this->Users->save($user)) {
                     $this->Flash->success(__('ユーザーを保存しました。'));
                 } else {
-                    $this->Flash->error(__('ユーザーが保存できませんでした。'));
-                    $saveResult = false;
+                    throw new Exception('ユーザーが保存できませんでした。');
                 }
 
                 //ユーザー変更ログの保存
                 if ($this->UserChangeLogs->save($userChangeLog)) {
                     $this->Flash->success(__('ユーザー変更ログを保存しました。'));
                 } else {
-                    $this->Flash->error(__('ユーザー変更ログが保存できませんでした。'));
-                    $saveResult = false;
+                    throw new Exception('ユーザー変更ログが保存できませんでした。');
                 }
                 return $saveResult;
             };
 
             //DBのコネクションを取得し、データ保存処理を実行
             $conn = $this->Users->getConnection();
-            $result = $conn->transactional($saveProc);
+            try {
+                $result = $conn->transactional($saveProc);
+            } catch (Exception $e) {
+                $this->Flash->error(__('例外が発生したため、' . $e->getMessage()));
+                $this->set(compact('user'));
+                return;
+            }
 
             // エラーがなければ一覧画面に遷移する
             if ($result) {
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('ユーザーとユーザーの変更ログの両方の保存が成功しなかったためロールバックしました。'));
-                // トランザクション、ロールバック
-                $conn->rollback();
             }
         }
         $this->set(compact('user'));
