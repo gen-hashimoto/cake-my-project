@@ -37,13 +37,13 @@ class Initilal extends AbstractMigration
             ])
             ->addColumn('created', 'timestamp', [
                 'comment' => '作成日',
-                'default' => 'current_timestamp()',
+                'default' => 'CURRENT_TIMESTAMP',
                 'limit' => null,
                 'null' => false,
             ])
             ->addColumn('modified', 'timestamp', [
                 'comment' => '更新日',
-                'default' => 'current_timestamp()',
+                'default' => 'CURRENT_TIMESTAMP',
                 'limit' => null,
                 'null' => false,
             ])
@@ -122,7 +122,7 @@ class Initilal extends AbstractMigration
                 'null' => false,
             ])
             ->addColumn('modified', 'timestamp', [
-                'default' => 'current_timestamp()',
+                'default' => 'CURRENT_TIMESTAMP',
                 'limit' => null,
                 'null' => false,
             ])
@@ -132,7 +132,7 @@ class Initilal extends AbstractMigration
                 'null' => true,
             ])
             ->addColumn('created', 'timestamp', [
-                'default' => 'current_timestamp()',
+                'default' => 'CURRENT_TIMESTAMP',
                 'limit' => null,
                 'null' => false,
             ])
@@ -188,13 +188,13 @@ class Initilal extends AbstractMigration
             ])
             ->addColumn('created', 'timestamp', [
                 'comment' => '作成日',
-                'default' => 'current_timestamp()',
+                'default' => 'CURRENT_TIMESTAMP',
                 'limit' => null,
                 'null' => false,
             ])
             ->addColumn('modified', 'timestamp', [
                 'comment' => '更新日',
-                'default' => 'current_timestamp()',
+                'default' => 'CURRENT_TIMESTAMP',
                 'limit' => null,
                 'null' => false,
             ])
