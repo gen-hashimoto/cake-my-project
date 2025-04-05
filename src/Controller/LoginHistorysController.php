@@ -51,7 +51,7 @@ class LoginHistorysController extends AppController
      */
     public function add()
     {
-        $loginHistory = $this->LoginHistorys->newEntity();
+        $loginHistory = $this->LoginHistorys->newEmptyEntity();
         if ($this->request->is('post')) {
             $loginHistory = $this->LoginHistorys->patchEntity($loginHistory, $this->request->getData());
             if ($this->LoginHistorys->save($loginHistory)) {

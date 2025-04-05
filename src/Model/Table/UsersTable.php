@@ -6,7 +6,6 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use SoftDelete\Model\Table\SoftDeleteTrait;
 // use Cake\Localized\Validation\JpValidation;
 
 /**
@@ -27,15 +26,13 @@ use SoftDelete\Model\Table\SoftDeleteTrait;
  */
 class UsersTable extends Table
 {
-    use SoftDeleteTrait;
-    protected $softDeleteField = 'deleted';
     /**
      * Initialize method
      *
      * @param array $config The configuration for the Table.
      * @return void
      */
-    public function initialize(array $config)
+    public function initialize(array $config): void
     {
         parent::initialize($config);
 
@@ -72,7 +69,7 @@ class UsersTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
-    public function validationDefault(Validator $validator)
+    public function validationDefault(Validator $validator): Validator
     {
         // $validator->setProvider('custom', 'App\Model\Validation\CustomValidation');
         // $validator->setProvider('jp', JpValidation::class);
@@ -145,7 +142,7 @@ class UsersTable extends Table
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
      * @return \Cake\ORM\RulesChecker
      */
-    public function buildRules(RulesChecker $rules)
+    public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['email']));
         $rules->add($rules->isUnique(['account']));

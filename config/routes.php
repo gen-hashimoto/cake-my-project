@@ -49,20 +49,20 @@ Router::defaultRouteClass(DashedRoute::class);
 
 Router::scope('/', function (RouteBuilder $routes) {
 
-    $routes->connect('/userlist', ['controller' => 'Users', 'action' => 'index']);
+    // $routes->connect('/userlist', ['controller' => 'Users', 'action' => 'index']);
 
-    $routes->scope('/member', function ($routes) {
-        $routes->connect('/info/:id', ['controller' => 'Users', 'action' => 'view'])
-            ->setPass(['id']);
-    });
+    // $routes->scope('/member', function ($routes) {
+    //     $routes->connect('/info/:id', ['controller' => 'Users', 'action' => 'view'])
+    //         ->setPass(['id']);
+    // });
 
-    $routes->scope('/member', function ($routes) {
-        $routes->scope('/vip', function ($routes) {
-            $routes->connect('/info/:id', ['controller' => 'Users', 'action' => 'view'])
-                ->setPatterns(['id' => '\d+'])
-                ->setPass(['id']);
-        });
-    });
+    // $routes->scope('/member', function ($routes) {
+    //     $routes->scope('/vip', function ($routes) {
+    //         $routes->connect('/info/:id', ['controller' => 'Users', 'action' => 'view'])
+    //             ->setPatterns(['id' => '\d+'])
+    //             ->setPass(['id']);
+    //     });
+    // });
 
     // Register scoped middleware for in scopes.
     $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware([

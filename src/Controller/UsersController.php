@@ -16,7 +16,7 @@ use \SplFileObject;
  */
 class UsersController extends AppController
 {
-    public function initialize()
+    public function initialize(): void
     {
         parent::initialize();
         $this->Auth->allow(['logout']);
@@ -67,7 +67,7 @@ class UsersController extends AppController
      */
     public function add()
     {
-        $user = $this->Users->newEntity();
+        $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
@@ -107,7 +107,7 @@ class UsersController extends AppController
             $result = true;
             // ユーザー変更履歴を生成する
             $this->loadModel('UserChangeLogs');
-            $userChangeLog = $this->UserChangeLogs->newEntity();
+            $userChangeLog = $this->UserChangeLogs->newEmptyEntity();
             $userChangeLog->action = 'edit';
             $userChangeLog->before_value = serialize($user);
             $userChangeLog->modified_user = $this->Auth->user('account');
@@ -153,7 +153,7 @@ class UsersController extends AppController
             $result = true;
             // ユーザー変更履歴を生成する
             $this->loadModel('UserChangeLogs');
-            $userChangeLog = $this->UserChangeLogs->newEntity();
+            $userChangeLog = $this->UserChangeLogs->newEmptyEntity();
             $userChangeLog->action = 'edit';
             $userChangeLog->before_value = serialize($user);
             $userChangeLog->modified_user = $this->Auth->user('account');
@@ -211,7 +211,7 @@ class UsersController extends AppController
     //             $saveResult = true;
     //             // ユーザー変更履歴を生成する
     //             $this->loadModel('UserChangeLogs');
-    //             $userChangeLog = $this->UserChangeLogs->newEntity();
+    //             $userChangeLog = $this->UserChangeLogs->newEmptyEntity();
     //             $userChangeLog->action = 'edit';
     //             $userChangeLog->before_value = serialize($user);
     //             $userChangeLog->modified_user = $this->Auth->user('account');
@@ -266,7 +266,7 @@ class UsersController extends AppController
                 $saveResult = true;
                 // ユーザー変更履歴を生成する
                 $this->loadModel('UserChangeLogs');
-                $userChangeLog = $this->UserChangeLogs->newEntity();
+                $userChangeLog = $this->UserChangeLogs->newEmptyEntity();
                 $userChangeLog->action = 'edit';
                 $userChangeLog->before_value = serialize($user);
                 $userChangeLog->modified_user = $this->Auth->user('account');
