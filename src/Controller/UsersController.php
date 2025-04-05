@@ -54,6 +54,9 @@ class UsersController extends AppController
             'contain' => ['LoginHistorys'],
         ]);
 
+        // \Cake\Error\Debugger::dump($user);
+        \Cake\Log\Log::debug($user);
+
         $this->set('user', $user);
     }
 

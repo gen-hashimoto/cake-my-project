@@ -46,6 +46,7 @@ use Cake\Utility\Inflector;
 use Cake\Utility\Security;
 use Cake\Validation\Validator;
 use Cake\Localized\Validation\JpValidation;
+use Cake\Error\Debugger;
 
 /**
  * Uncomment block of code below if you want to use `.env` file during development.
@@ -207,3 +208,7 @@ Type::build('timestamp')
 
 // Validator::addDefaultProvider('custom', 'App\Model\Validation\CustomValidation');
 Validator::addDefaultProvider('jp', JpValidation::class);
+
+Debugger::setOutputMask([
+    'password' => '☺☺☺☺☺☺☺☺☺☺☺',
+]);
